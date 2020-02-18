@@ -1,19 +1,21 @@
 ﻿
 //Start watering and limit it to 10 seconds unless the Stop is clicked.
 function startWatering(btnId, plantId) {
-    var timeleft = 10;
-    document.getElementById(btnId).setAttribute('hidden', 'hidden');
-    var stopBtnId = btnId.replace('start_btn', 'stop_btn');
-
     var restLbl = btnId.replace('start_btn', 'status_lbl');
-    changeStatus(restLbl, 'Watering...', 'blue');
+    var status = document.getElementById(restLbl).innerText;
+    if (status != 'Resting...' && status != 'Watering...') {
+        var timeleft = 10;
+        document.getElementById(btnId).setAttribute('hidden', 'hidden');
+        var stopBtnId = btnId.replace('start_btn', 'stop_btn');
 
-    document.getElementById(stopBtnId).removeAttribute('hidden');
-    var index = getIndex(btnId);
+        changeStatus(restLbl, 'Watering...', 'blue');
 
-    //Set a value to a global variable defined in code-behind.
-    window['p' + index] = startTimer(btnId, timeleft, plantId);
+        document.getElementById(stopBtnId).removeAttribute('hidden');
+        var index = getIndex(btnId);
 
+        //Set a value to a global variable defined in code-behind.
+        window['p' + index] = startTimer(btnId, timeleft, plantId);
+    }
 }
 
 //Save a watering to the database
