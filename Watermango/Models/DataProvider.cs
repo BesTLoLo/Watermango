@@ -89,7 +89,7 @@ namespace Watermango.Models
                             cmd.Parameters.AddRange(parameters);
                         }
                         con.Open();
-                        res = int.Parse(cmd.ExecuteScalar().ToString());
+                        res = int.Parse(cmd.ExecuteScalar()?.ToString());
                     }
                 }
             }
